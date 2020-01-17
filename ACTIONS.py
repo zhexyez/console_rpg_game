@@ -11,7 +11,7 @@ class ACTS:
         for elem in range (0, X_get_map):
             for item in range (0, Y_get_map):
                 if get_map_points[elem][item] == 7:
-                    if get_map_points[elem][item+1] == 1 or get_map_points[elem][item+1] == 3:
+                    if get_map_points[elem][item+1] == 1 or get_map_points[elem][item+1] == 3 or get_map_points[elem][item+1] == 6:
                         update_map = DR.DRAWS.map_objects_analyze (get_map_points, X_get_map, Y_get_map)
                         update_draw = DR.DRAWS.final_draw (update_map)
                         print("---U CAN NOT GO RIGHT HERE---")
@@ -30,7 +30,7 @@ class ACTS:
         for elem in range (0, X_get_map):
             for item in range (0, Y_get_map):
                 if get_map_points[elem][item] == 7:
-                    if get_map_points[elem][item-1] == 1 or get_map_points[elem][item-1] == 3:
+                    if get_map_points[elem][item-1] == 1 or get_map_points[elem][item-1] == 3 or get_map_points[elem][item-1] == 6:
                         update_map = DR.DRAWS.map_objects_analyze (get_map_points, X_get_map, Y_get_map)
                         update_draw = DR.DRAWS.final_draw (update_map)
                         print("---U CAN NOT GO LEFT HERE---")
@@ -51,7 +51,7 @@ class ACTS:
                 if get_map_points[elem][item] == 7:
                     try:
                         t = get_map_points[elem+1]
-                        if get_map_points[elem+1][item] == 1 or get_map_points[elem+1][item] == 3:
+                        if get_map_points[elem+1][item] == 1 or get_map_points[elem+1][item] == 3 or get_map_points[elem+1][item] == 6:
                             update_map = DR.DRAWS.map_objects_analyze (get_map_points, X_get_map, Y_get_map)
                             update_draw = DR.DRAWS.final_draw (update_map)
                             print("---U CAN NOT GO DOWN HERE---")
@@ -80,7 +80,7 @@ class ACTS:
                         print("---U CAN NOT GO UP HERE---")
                         return None
                     else:
-                        if get_map_points[elem-1][item] == 1 or get_map_points[elem-1][item] == 3:
+                        if get_map_points[elem-1][item] == 1 or get_map_points[elem-1][item] == 3 or get_map_points[elem-1][item] == 6:
                             update_map = DR.DRAWS.map_objects_analyze (get_map_points, X_get_map, Y_get_map)
                             update_draw = DR.DRAWS.final_draw (update_map)
                             print("---U CAN NOT GO UP HERE---")

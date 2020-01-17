@@ -2,6 +2,7 @@ import DATABASE as DB
 import DRAWER as DR
 import ACTIONS as ACT
 import GAMESTATUS as GSTAT
+import MAPPING as MAPP
 import os,time
 
 def screen_clearing ():
@@ -12,7 +13,8 @@ def screen_clearing ():
 
     return None
 
-get_map = DB.DRAW.map_zero
+set_map = MAPP.MAPS.read_map("lvl_second.txt")
+get_map = set_map
 X_get_map = len(get_map)
 Y_get_map = len(get_map[0])
 get_map_points = DR.DRAWS.map_analyzer (get_map, X_get_map, Y_get_map)
