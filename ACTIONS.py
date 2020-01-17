@@ -1,6 +1,8 @@
 import DATABASE as DB
 import DRAWER as DR
 import os
+import ITERACTIONS as ITER
+import GAMESTATUS as GSTAT
 
 class ACTS:
 
@@ -15,7 +17,8 @@ class ACTS:
                         print("---U CAN NOT GO RIGHT HERE---")
                         return None
                     else:
-                        get_map_points[elem][item] = get_map_points[elem][item+1]
+                        iteracted = ITER.ITERACTS.is_iteracted(get_map_points[elem][item], get_map_points[elem][item+1])
+                        get_map_points[elem][item] = iteracted
                         get_map_points[elem][item+1] = 7
                         break
 
@@ -33,7 +36,8 @@ class ACTS:
                         print("---U CAN NOT GO LEFT HERE---")
                         return None
                     else:
-                        get_map_points[elem][item] = get_map_points[elem][item-1]
+                        iteracted = ITER.ITERACTS.is_iteracted(get_map_points[elem][item], get_map_points[elem][item-1])
+                        get_map_points[elem][item] = iteracted
                         get_map_points[elem][item-1] = 7
                         break
         
@@ -53,7 +57,8 @@ class ACTS:
                             print("---U CAN NOT GO DOWN HERE---")
                             return None
                         else:
-                            get_map_points[elem][item] = get_map_points[elem+1][item]
+                            iteracted = ITER.ITERACTS.is_iteracted(get_map_points[elem][item], get_map_points[elem+1][item])
+                            get_map_points[elem][item] = iteracted
                             get_map_points[elem+1][item] = 7        
                             update_map = DR.DRAWS.map_objects_analyze (get_map_points, X_get_map, Y_get_map)
                             update_draw = DR.DRAWS.final_draw (update_map)
@@ -75,8 +80,14 @@ class ACTS:
                         print("---U CAN NOT GO UP HERE---")
                         return None
                     else:
-                        if get_map_points[elem-1][item] != 1 or get_map_points[elem-1][item] != 3:
-                            get_map_points[elem][item] = get_map_points[elem-1][item]
+                        if get_map_points[elem-1][item] == 1 or get_map_points[elem-1][item] == 3:
+                            update_map = DR.DRAWS.map_objects_analyze (get_map_points, X_get_map, Y_get_map)
+                            update_draw = DR.DRAWS.final_draw (update_map)
+                            print("---U CAN NOT GO UP HERE---")
+                            return None
+                        else:
+                            iteracted = ITER.ITERACTS.is_iteracted(get_map_points[elem][item], get_map_points[elem-1][item])
+                            get_map_points[elem][item] = iteracted
                             get_map_points[elem-1][item] = 7         
                             update_map = DR.DRAWS.map_objects_analyze (get_map_points, X_get_map, Y_get_map)
                             update_draw = DR.DRAWS.final_draw (update_map)
