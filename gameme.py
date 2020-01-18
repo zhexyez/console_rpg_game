@@ -4,6 +4,11 @@ import ACTIONS as ACT
 import GAMESTATUS as GSTAT
 import MAPPING as MAPP
 import os,time
+import glob
+
+# maps db init
+DB.DRAW.maps_db = glob.glob('*.txt')
+DB.DRAW.maps_names = MAPP.MAPS.read_name_space()
 
 def screen_clearing ():
     if os.name == 'nt':
@@ -13,13 +18,13 @@ def screen_clearing ():
 
     return None
 
-set_map = MAPP.MAPS.read_map("lvl_second.txt")
+set_map = MAPP.MAPS.read_map(DB.DRAW.maps_db[DB.DRAW.current_map])
 get_map = set_map
-X_get_map = len(get_map)
-Y_get_map = len(get_map[0])
-get_map_points = DR.DRAWS.map_analyzer (get_map, X_get_map, Y_get_map)
+DB.DRAW.X_get_map = len(get_map)
+DB.DRAW.Y_get_map = len(get_map[0])
+DB.DRAW.get_map_points = DR.DRAWS.map_analyzer (get_map)
 #print(get_map_points)
-draw_map = DR.DRAWS.map_objects_analyze (get_map_points, X_get_map, Y_get_map)
+draw_map = DR.DRAWS.map_objects_analyze (DB.DRAW.get_map_points)
 #print(draw_map)
 DR.DRAWS.final_draw (draw_map)
 print("money: ", GSTAT.GAMESTATS.player_stats["money"], " hp: ", GSTAT.GAMESTATS.player_stats["hp"], " power ", GSTAT.GAMESTATS.player_stats["power"])
@@ -29,23 +34,23 @@ while i < 100000:
     if type(user_input) == str:
         if user_input == "u":
             screen_clearing ()
-            print("---UPDATE---")
-            ACT.ACTS.go_up(get_map_points, X_get_map, Y_get_map)
+            #print(DB.DRAW.maps_names[DB.DRAW.current_map])
+            ACT.ACTS.go_up()
             print("money: ", GSTAT.GAMESTATS.player_stats["money"], " hp: ", GSTAT.GAMESTATS.player_stats["hp"], " power ", GSTAT.GAMESTATS.player_stats["power"])
         elif user_input == "d":
             screen_clearing ()
-            print("---UPDATE---")
-            ACT.ACTS.go_down(get_map_points, X_get_map, Y_get_map)
+            #print(DB.DRAW.maps_names[DB.DRAW.current_map])
+            ACT.ACTS.go_down()
             print("money: ", GSTAT.GAMESTATS.player_stats["money"], " hp: ", GSTAT.GAMESTATS.player_stats["hp"], " power ", GSTAT.GAMESTATS.player_stats["power"])
         elif user_input == "r":
             screen_clearing ()
-            print("---UPDATE---")
-            ACT.ACTS.go_right(get_map_points, X_get_map, Y_get_map)
+            #print(DB.DRAW.maps_names[DB.DRAW.current_map])
+            ACT.ACTS.go_right()
             print("money: ", GSTAT.GAMESTATS.player_stats["money"], " hp: ", GSTAT.GAMESTATS.player_stats["hp"], " power ", GSTAT.GAMESTATS.player_stats["power"])
         elif user_input == "l":
             screen_clearing ()
-            print("---UPDATE---")
-            ACT.ACTS.go_left(get_map_points, X_get_map, Y_get_map)
+            #print(DB.DRAW.maps_names[DB.DRAW.current_map])
+            ACT.ACTS.go_left()
             print("money: ", GSTAT.GAMESTATS.player_stats["money"], " hp: ", GSTAT.GAMESTATS.player_stats["hp"], " power ", GSTAT.GAMESTATS.player_stats["power"])
         elif user_input == "e":
             screen_clearing ()
@@ -53,11 +58,11 @@ while i < 100000:
             exit()
         else:
             screen_clearing ()
-            print("---UPDATE---")
-            ACT.ACTS.error_handling(get_map_points, X_get_map, Y_get_map)
+            #print(DB.DRAW.maps_names[DB.DRAW.current_map])
+            ACT.ACTS.error_handling()
             print("money: ", GSTAT.GAMESTATS.player_stats["money"], " hp: ", GSTAT.GAMESTATS.player_stats["hp"], " power ", GSTAT.GAMESTATS.player_stats["power"])
     else:
         screen_clearing ()
-        print("---UPDATE---")
-        ACT.ACTS.error_handling(get_map_points, X_get_map, Y_get_map)
+        #print(DB.DRAW.maps_names[DB.DRAW.current_map])
+        ACT.ACTS.error_handling()
         print("money: ", GSTAT.GAMESTATS.player_stats["money"], " hp: ", GSTAT.GAMESTATS.player_stats["hp"], " power ", GSTAT.GAMESTATS.player_stats["power"])

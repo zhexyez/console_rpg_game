@@ -24,3 +24,11 @@ class DRAW:
          [' ','.','.','.','o','.','.','.',' ',' '],
          [' ','.','.','.','.','.','.','.',' ',' ']
         ]
+
+    maps_db = []
+    maps_names = []
+
+    get_map_points = []
+    X_get_map = 0
+    Y_get_map = 0
+    current_map = 0
