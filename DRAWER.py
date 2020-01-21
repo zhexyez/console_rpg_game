@@ -23,6 +23,8 @@ class DRAWS:
                     analyzed[elem][item] = 7
                 elif get_map[elem][item] == DB.DRAW.objects_draw_grid_map[8]:
                     analyzed[elem][item] = 8
+                elif get_map[elem][item] == DB.DRAW.objects_draw_grid_map[9]:
+                    analyzed[elem][item] = 9
         return(analyzed)
 
     @staticmethod

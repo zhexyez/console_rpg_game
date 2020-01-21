@@ -2,6 +2,7 @@ import DATABASE as DB
 import DRAWER as DR
 import GAMESTATUS as GSTAT
 import MAPPING as MAPP
+import FIGHTING as FIGH
 
 class ITERACTS:
 
@@ -23,5 +24,29 @@ class ITERACTS:
                     if DB.DRAW.get_map_points[elem][item] == 7:
                         player_current = [elem, item]
             return player_current, 2, True
+        elif object_current == 9:
+            if GSTAT.GAMESTATS.player_stats["hp"] > 0:
+                enemy_hp_stat = 0
+                enemy_power_stat = 0
+                enemy_hp_stat = GSTAT.GAMESTATS.enemy_stats["hp"]
+                enemy_power_stat = GSTAT.GAMESTATS.enemy_stats["power"]
+                FIGH.FIGHTS.current_fight (object_current, enemy_hp_stat, enemy_power_stat)
+            else:
+                print("---PLEASE DONT CHEAT---")
+                exit()
+                
+            return player_current, 2, False
+        elif object_current == 10:
+            if GSTAT.GAMESTATS.player_stats["hp"] > 0:
+                enemy_hp_stat = 0
+                enemy_power_stat = 0
+                enemy_hp_stat = GSTAT.GAMESTATS.enemy_stats["hp_boss"]
+                enemy_power_stat = GSTAT.GAMESTATS.enemy_stats["power_boss"]
+                FIGH.FIGHTS.current_fight (object_current, enemy_hp_stat, enemy_power_stat)
+            else:
+                print("---PLEASE DONT CHEAT---")
+                exit()
+                
+            return player_current, 2, False
         else:
             return player_current, object_current, False
