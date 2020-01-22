@@ -21,18 +21,30 @@ class FIGHTS:
                 return None
             FIGHTS.screen_clearing()
             print("--- FIGHT YOUR ENEMY ---")
-            print(DB.DRAW.objects_draw_grid_map[7] + ' _-= versus =-_ ' + DB.DRAW.objects_draw_grid_map[enemy])
-            print(str(GSTAT.GAMESTATS.player_stats["hp"]) + ' ' + str(GSTAT.GAMESTATS.player_stats["power"]) + ' _-= powers =-_ ' + str(enemy_hp_stat) + ' ' + str(enemy_power_stat))
-            user_input = input("What to choose? (attack/defence) a/d: ")
+            print('   ' + DB.DRAW.objects_draw_grid_map[7] + ' _-= versus =-_ ' + DB.DRAW.objects_draw_grid_map[enemy] + '   ')
+            print(str(GSTAT.GAMESTATS.player_stats["hp"]) + ' ' + str(GSTAT.GAMESTATS.player_stats["power"]) + ' _-= stats =-_ ' + str(enemy_hp_stat) + ' ' + str(enemy_power_stat))
+            user_input = input("Attack! Or choose a power up from inventory. a/i: ")
             if user_input == "a":
                 print('attacked')
-                GSTAT.GAMESTATS.player_stats["hp"] -= enemy_power_stat
-                enemy_hp_stat -= GSTAT.GAMESTATS.player_stats["power"]
-            elif user_input == "d":
-                print('defenced')
-                coefficient = enemy_power_stat - GSTAT.GAMESTATS.player_stats["power"]
-                if coefficient < 0:
-                    GSTAT.GAMESTATS.player_stats["hp"] -= GSTAT.GAMESTATS.player_stats["power"] - enemy_power_stat
+                # d is less then 0 - i'm pucned
+                coefficient_d = GSTAT.GAMESTATS.player_stats["power"] - enemy_power_stat
+                # a is less then 0 - i punched
+                coefficient_a = enemy_power_stat - GSTAT.GAMESTATS.player_stats["power"]
+                if coefficient_a < 0:
+                    enemy_hp_stat += coefficient_a
+                    if coefficient_d < 0:
+                        GSTAT.GAMESTATS.player_stats["hp"] += coefficient_d
+                elif coefficient_a == 0:
+                    enemy_hp_stat += coefficient_a
+                    if coefficient_d < 0:
+                        GSTAT.GAMESTATS.player_stats["hp"] += coefficient_d
+                elif coefficient_a > 0:
+                    enemy_hp_stat += 0
+                    if coefficient_d < 0:
+                        GSTAT.GAMESTATS.player_stats["hp"] += coefficient_d
+                    
+            elif user_input == "i":
+                print("Nothing yet")
             else:
                 print('you can not exit through the battle')
             
