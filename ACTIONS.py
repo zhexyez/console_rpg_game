@@ -18,7 +18,7 @@ class ACTS:
                         return None
                     else:
                         isit = True
-                        pl_current, iteracted, flag = ITER.ITERACTS.is_iteracted(DB.DRAW.get_map_points[elem][item], DB.DRAW.get_map_points[elem][item+1], isit)
+                        pl_current, iteracted, trash, flag = ITER.ITERACTS.is_iteracted(DB.DRAW.get_map_points[elem][item], DB.DRAW.get_map_points[elem][item+1], item, isit)
                         if flag == False:
                             DB.DRAW.get_map_points[elem][item] = iteracted
                             DB.DRAW.get_map_points[elem][item+1] = 7
@@ -39,7 +39,7 @@ class ACTS:
                         return None
                     else:
                         isit = True
-                        pl_current, iteracted, flag = ITER.ITERACTS.is_iteracted(DB.DRAW.get_map_points[elem][item], DB.DRAW.get_map_points[elem][item-1], isit)
+                        pl_current, iteracted, trash, flag = ITER.ITERACTS.is_iteracted(DB.DRAW.get_map_points[elem][item], DB.DRAW.get_map_points[elem][item-1], item, isit)
                         if flag == False:
                             DB.DRAW.get_map_points[elem][item] = iteracted
                             DB.DRAW.get_map_points[elem][item-1] = 7
@@ -63,7 +63,7 @@ class ACTS:
                             return None
                         else:
                             isit = True
-                            pl_current, iteracted, flag = ITER.ITERACTS.is_iteracted(DB.DRAW.get_map_points[elem][item], DB.DRAW.get_map_points[elem+1][item], isit)
+                            pl_current, iteracted, trash, flag = ITER.ITERACTS.is_iteracted(DB.DRAW.get_map_points[elem][item], DB.DRAW.get_map_points[elem+1][item], item, isit)
                             if flag == False:
                                 DB.DRAW.get_map_points[elem][item] = iteracted
                                 DB.DRAW.get_map_points[elem+1][item] = 7
@@ -95,7 +95,7 @@ class ACTS:
                             return None
                         else:
                             isit = True
-                            pl_current, iteracted, flag = ITER.ITERACTS.is_iteracted(DB.DRAW.get_map_points[elem][item], DB.DRAW.get_map_points[elem-1][item], isit)
+                            pl_current, iteracted, trash, flag = ITER.ITERACTS.is_iteracted(DB.DRAW.get_map_points[elem][item], DB.DRAW.get_map_points[elem-1][item], item, isit)
                             if flag == False:
                                 DB.DRAW.get_map_points[elem][item] = iteracted
                                 DB.DRAW.get_map_points[elem-1][item] = 7
