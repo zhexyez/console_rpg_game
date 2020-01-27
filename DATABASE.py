@@ -34,3 +34,5 @@ class DRAW:
     X_get_map = 0
     Y_get_map = 0
     current_map = 0
+
+    maps_db_masks = []

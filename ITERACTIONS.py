@@ -3,6 +3,7 @@ import DRAWER as DR
 import GAMESTATUS as GSTAT
 import MAPPING as MAPP
 import FIGHTING as FIGH
+import CHECKING as CH
 import copy
 
 class ITERACTS:
@@ -35,12 +36,41 @@ class ITERACTS:
         DB.DRAW.X_get_map = len(get_map)
         DB.DRAW.Y_get_map = len(get_map[0])
         DB.DRAW.get_map_points = DR.DRAWS.map_analyzer (get_map)
+        CH.CHECKS.check_objects()
+
+    def change_state (X, Y, direction):
+        current_map_mask = DB.DRAW.maps_db_masks[DB.DRAW.current_map+1]
+        if direction == 0:
+            X-=1
+            for pointer in current_map_mask:
+                if pointer["x_coord"] == X and pointer["y_coord"] == Y:
+                    pointer["was_interacted"] = 1
+                    return None
+        elif direction == 1:
+            X+=1
+            for pointer in current_map_mask:
+                if pointer["x_coord"] == X and pointer["y_coord"] == Y:
+                    pointer["was_interacted"] = 1
+                    return None
+        elif direction == 2:
+            Y-=1
+            for pointer in current_map_mask:
+                if pointer["x_coord"] == X and pointer["y_coord"] == Y:
+                    pointer["was_interacted"] = 1
+                    return None
+        elif direction == 3:
+            Y+=1
+            for pointer in current_map_mask:
+                if pointer["x_coord"] == X and pointer["y_coord"] == Y:
+                    pointer["was_interacted"] = 1
+                    return None
 
     @staticmethod
-    def is_iteracted (player_current, object_current, current_X_position, flag):
+    def is_iteracted (player_current, object_current, current_Y_position, current_X_position, flag, direction):
         if object_current == 8:
             # object is "o" coin/money
             GSTAT.GAMESTATS.player_stats["money"] += 10
+            ITERACTS.change_state(current_Y_position, current_X_position, direction)
             return player_current, 2, current_X_position, False
         
         elif object_current == 5:

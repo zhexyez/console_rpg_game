@@ -5,6 +5,7 @@ import DRAWER as DR
 import ACTIONS as ACT
 import GAMESTATUS as GSTAT
 import MAPPING as MAPP
+import CHECKING as CH
 import os,time
 import glob
 
@@ -30,6 +31,7 @@ get_map = set_map
 DB.DRAW.X_get_map = len(get_map)
 DB.DRAW.Y_get_map = len(get_map[0])
 DB.DRAW.get_map_points = DR.DRAWS.map_analyzer (get_map)
+CH.CHECKS.check_objects()
 draw_map = DR.DRAWS.map_objects_analyze (DB.DRAW.get_map_points)
 DR.DRAWS.final_draw (draw_map)
 print_stat()
