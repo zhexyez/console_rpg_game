@@ -7,6 +7,7 @@ import GAMESTATUS as GSTAT
 import MAPPING as MAPP
 import CHECKING as CH
 import INVENTORY as IN
+import SAVELOAD as SL
 import os,time
 import glob
 
@@ -26,6 +27,25 @@ def screen_clearing ():
 def print_stat ():
     print("money: ", GSTAT.GAMESTATS.player_stats["money"], " hp: ", GSTAT.GAMESTATS.player_stats["hp"], " power ", GSTAT.GAMESTATS.player_stats["power"])
 
+# menu
+def menu ():
+    screen_clearing()
+    print("\t-= RPG GAME =-")
+    print("\n")
+    print("-= New Game (n) or Load Game (l) =-")
+    print("\n")
+    menu_input = input("-> ")
+    if menu_input == "n":
+        screen_clearing()
+        return None
+    elif menu_input == "l":
+        screen_clearing()
+        SL.SAVESLOADS.load()
+        return None
+    else:
+        menu()
+
+menu()
 # main initialization
 set_map = MAPP.MAPS.read_map(DB.DRAW.maps_db[DB.DRAW.current_map])
 get_map = set_map
@@ -36,10 +56,9 @@ CH.CHECKS.check_objects()
 draw_map = DR.DRAWS.map_objects_analyze (DB.DRAW.get_map_points)
 DR.DRAWS.final_draw (draw_map)
 print_stat()
-# wait for eternity or user input
-#iterations = 0
+# main loop
 while True:
-    user_input = input("Next? u/d/r/l/i/e: ")
+    user_input = input("Next? u/d/r/l/i/s/e: ")
     if type(user_input) == str:
         if user_input == "u":
             screen_clearing ()
@@ -65,7 +84,12 @@ while True:
             screen_clearing ()
             IN.INVENTORIES.show_inventory()
             screen_clearing ()
-            #CH.CHECKS.check_objects()
+            update_map = DR.DRAWS.map_objects_analyze (DB.DRAW.get_map_points)
+            update_draw = DR.DRAWS.final_draw (update_map)
+            print_stat()
+        elif user_input == "s":
+            SL.SAVESLOADS.save()
+            screen_clearing ()
             update_map = DR.DRAWS.map_objects_analyze (DB.DRAW.get_map_points)
             update_draw = DR.DRAWS.final_draw (update_map)
             print_stat()
