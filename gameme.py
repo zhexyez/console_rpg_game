@@ -6,6 +6,7 @@ import ACTIONS as ACT
 import GAMESTATUS as GSTAT
 import MAPPING as MAPP
 import CHECKING as CH
+import INVENTORY as IN
 import os,time
 import glob
 
@@ -36,9 +37,9 @@ draw_map = DR.DRAWS.map_objects_analyze (DB.DRAW.get_map_points)
 DR.DRAWS.final_draw (draw_map)
 print_stat()
 # wait for eternity or user input
-iterations = 0
-while iterations < 100000:
-    user_input = input("Next? u/d/r/l/e: ")
+#iterations = 0
+while True:
+    user_input = input("Next? u/d/r/l/i/e: ")
     if type(user_input) == str:
         if user_input == "u":
             screen_clearing ()
@@ -60,6 +61,14 @@ while iterations < 100000:
             screen_clearing ()
             print("---BYE---")
             exit()
+        elif user_input == "i":
+            screen_clearing ()
+            IN.INVENTORIES.show_inventory()
+            screen_clearing ()
+            #CH.CHECKS.check_objects()
+            update_map = DR.DRAWS.map_objects_analyze (DB.DRAW.get_map_points)
+            update_draw = DR.DRAWS.final_draw (update_map)
+            print_stat()
         else:
             screen_clearing ()
             ACT.ACTS.error_handling()

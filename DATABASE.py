@@ -36,3 +36,18 @@ class DRAW:
     current_map = 0
 
     maps_db_masks = []
+
+    for_hp = [
+        ["Red Tea", 25, 15],
+        ["Snickers", 50, 30],
+        ["Bread", 75, 50],
+        ["Tiny piece of Chocolate", 100, 80]
+    ]
+    for_power = [
+        ["Pepsi", 2, 20],
+        ["Red Bull", 4, 40],
+        ["Rum", 6, 70],
+        ["Water", 10, 110]
+    ]
+
+    items_for_player = [for_hp, for_power]
