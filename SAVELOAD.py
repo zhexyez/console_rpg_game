@@ -26,11 +26,13 @@ class SAVESLOADS:
     @staticmethod
     def load ():
         with open('save.txt', 'rb') as savefile:
-            loaded_list = pickle.load(savefile)
-            if len(loaded_list) == 0:
+            try:
+                loaded_list = pickle.load(savefile)
+                if len(loaded_list) == 0:
+                    return None
+                DB.DRAW.current_map = loaded_list[0]
+                DB.DRAW.maps_db_masks = loaded_list[1]
+                GSTAT.GAMESTATS.player_stats = loaded_list[2]
+                GSTAT.GAMESTATS.inventory = loaded_list[3]
+            except EOFError:
                 return None
-            DB.DRAW.current_map = loaded_list[0]
-            DB.DRAW.maps_db_masks = loaded_list[1]
-            GSTAT.GAMESTATS.player_stats = loaded_list[2]
-            GSTAT.GAMESTATS.inventory = loaded_list[3]
-        return None
