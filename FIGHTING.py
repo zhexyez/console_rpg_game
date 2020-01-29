@@ -1,5 +1,6 @@
 import DATABASE as DB
 import GAMESTATUS as GSTAT
+import INVENTORY as IN
 import os,time
 import glob
 
@@ -44,7 +45,9 @@ class FIGHTS:
                         GSTAT.GAMESTATS.player_stats["hp"] += coefficient_d
                     
             elif user_input == "i":
-                print("Nothing yet")
+                FIGHTS.screen_clearing ()
+                IN.INVENTORIES.show_inventory()
+                FIGHTS.screen_clearing ()
             else:
                 print('you can not exit through the battle')
             

@@ -10,6 +10,7 @@ import INVENTORY as IN
 import SAVELOAD as SL
 import os,time
 import glob
+import keyboard
 
 # maps db init
 DB.DRAW.maps_db = glob.glob('*.txt')
@@ -26,7 +27,7 @@ def screen_clearing ():
 
 def print_stat ():
     print("money: ", GSTAT.GAMESTATS.player_stats["money"], " hp: ", GSTAT.GAMESTATS.player_stats["hp"], " power ", GSTAT.GAMESTATS.player_stats["power"])
-
+    
 # menu
 def menu ():
     screen_clearing()
@@ -58,21 +59,21 @@ DR.DRAWS.final_draw (draw_map)
 print_stat()
 # main loop
 while True:
-    user_input = input("Next? u/d/r/l/i/s/e: ")
+    user_input = input("Next? w-a-s-d/i-inventory/s-save/e-exit: ")
     if type(user_input) == str:
-        if user_input == "u":
+        if user_input == "w":
             screen_clearing ()
             ACT.ACTS.go_up()
             print_stat()
-        elif user_input == "d":
+        elif user_input == "s":
             screen_clearing ()
             ACT.ACTS.go_down()
             print_stat()
-        elif user_input == "r":
+        elif user_input == "d":
             screen_clearing ()
             ACT.ACTS.go_right()
             print_stat()
-        elif user_input == "l":
+        elif user_input == "a":
             screen_clearing ()
             ACT.ACTS.go_left()
             print_stat()
