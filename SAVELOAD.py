@@ -11,6 +11,7 @@ class SAVESLOADS:
         main_list.append(DB.DRAW.maps_db_masks)
         main_list.append(GSTAT.GAMESTATS.player_stats)
         main_list.append(GSTAT.GAMESTATS.inventory)
+        main_list.append(GSTAT.GAMESTATS.enemy_stats)
         """
         ### If it needed to remember player position - use lines below ###
         for elem in range (0, DB.DRAW.get_map_points):
@@ -34,5 +35,6 @@ class SAVESLOADS:
                 DB.DRAW.maps_db_masks = loaded_list[1]
                 GSTAT.GAMESTATS.player_stats = loaded_list[2]
                 GSTAT.GAMESTATS.inventory = loaded_list[3]
+                GSTAT.GAMESTATS.enemy_stats = loaded_list[4]
             except EOFError:
                 return None

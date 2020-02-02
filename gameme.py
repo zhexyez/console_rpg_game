@@ -26,6 +26,7 @@ def screen_clearing ():
     return None
 
 def print_stat ():
+    print("lvl: ", GSTAT.GAMESTATS.player_stats["lvl"], " exp: ", GSTAT.GAMESTATS.player_stats["exp"])
     print("money: ", GSTAT.GAMESTATS.player_stats["money"], " hp: ", GSTAT.GAMESTATS.player_stats["hp"], " power ", GSTAT.GAMESTATS.player_stats["power"])
     
 # menu
@@ -37,6 +38,15 @@ def menu ():
     print("\n")
     menu_input = input("-> ")
     if menu_input == "n":
+        GSTAT.GAMESTATS.player_stats["money"] = 0
+        GSTAT.GAMESTATS.player_stats["hp"] = 100
+        GSTAT.GAMESTATS.player_stats["exp"] = 0
+        GSTAT.GAMESTATS.player_stats["lvl"] = 1
+        GSTAT.GAMESTATS.player_stats["power"] = 10
+        GSTAT.GAMESTATS.enemy_stats["hp"] = 50
+        GSTAT.GAMESTATS.enemy_stats["power"] = 5
+        GSTAT.GAMESTATS.enemy_stats["hp_boss"] = 300
+        GSTAT.GAMESTATS.enemy_stats["power_boss"] = 20
         screen_clearing()
         return None
     elif menu_input == "l":
@@ -59,7 +69,7 @@ DR.DRAWS.final_draw (draw_map)
 print_stat()
 # main loop
 while True:
-    user_input = input("Next? w-a-s-d/i-inventory/s-save/e-exit: ")
+    user_input = input("Next? w-a-s-d/i-inventory/q-save/e-exit: ")
     if type(user_input) == str:
         if user_input == "w":
             screen_clearing ()
@@ -88,7 +98,7 @@ while True:
             update_map = DR.DRAWS.map_objects_analyze (DB.DRAW.get_map_points)
             update_draw = DR.DRAWS.final_draw (update_map)
             print_stat()
-        elif user_input == "s":
+        elif user_input == "q":
             SL.SAVESLOADS.save()
             screen_clearing ()
             update_map = DR.DRAWS.map_objects_analyze (DB.DRAW.get_map_points)

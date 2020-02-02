@@ -5,7 +5,9 @@ class GAMESTATS:
     player_stats = {
         "money": 0,
         "hp": 100,
-        "power": 10
+        "power": 10,
+        "exp": 0,
+        "lvl": 1
         }
 
     enemy_stats = {
@@ -29,3 +31,5 @@ class GAMESTATS:
     ]
 
     inventory = [for_hp, for_power]
+
+    lvl_booster = 100

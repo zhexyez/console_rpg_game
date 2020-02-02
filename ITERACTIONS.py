@@ -8,6 +8,17 @@ import copy
 
 class ITERACTS:
 
+    def lvl_handler (enemy_hp_stat):
+        GSTAT.GAMESTATS.player_stats["exp"] += enemy_hp_stat
+        if GSTAT.GAMESTATS.player_stats["exp"] >= GSTAT.GAMESTATS.lvl_booster * GSTAT.GAMESTATS.player_stats["lvl"]:
+            GSTAT.GAMESTATS.player_stats["lvl"] += int(GSTAT.GAMESTATS.player_stats["exp"]//100)
+            GSTAT.GAMESTATS.player_stats["exp"] = int(GSTAT.GAMESTATS.player_stats["exp"]%100)
+            GSTAT.GAMESTATS.player_stats["power"] += 1
+            GSTAT.GAMESTATS.enemy_stats["hp"] = GSTAT.GAMESTATS.enemy_stats["hp"] * GSTAT.GAMESTATS.player_stats["lvl"]
+            GSTAT.GAMESTATS.enemy_stats["power"] = GSTAT.GAMESTATS.enemy_stats["power"] + 5
+            GSTAT.GAMESTATS.enemy_stats["hp_boss"] = GSTAT.GAMESTATS.enemy_stats["hp_boss"] * GSTAT.GAMESTATS.player_stats["lvl"]
+            GSTAT.GAMESTATS.enemy_stats["power_boss"] = GSTAT.GAMESTATS.enemy_stats["power"] + 10
+
     def change_map_player_position (is_right, relative_half):
         if is_right == 0:
             for e in range (0, DB.DRAW.X_get_map-1):
@@ -117,6 +128,7 @@ class ITERACTS:
                 enemy_hp_stat = GSTAT.GAMESTATS.enemy_stats["hp"]
                 enemy_power_stat = GSTAT.GAMESTATS.enemy_stats["power"]
                 FIGH.FIGHTS.current_fight (object_current, enemy_hp_stat, enemy_power_stat)
+                ITERACTS.lvl_handler(enemy_hp_stat)
             else:
                 print("---PLEASE DONT CHEAT---")
                 exit()
@@ -130,10 +142,14 @@ class ITERACTS:
                 enemy_hp_stat = GSTAT.GAMESTATS.enemy_stats["hp_boss"]
                 enemy_power_stat = GSTAT.GAMESTATS.enemy_stats["power_boss"]
                 FIGH.FIGHTS.current_fight (object_current, enemy_hp_stat, enemy_power_stat)
+                ITERACTS.lvl_handler(enemy_hp_stat)
             else:
                 print("---PLEASE DONT CHEAT---")
                 exit()
                 
             return player_current, 2, current_X_position, False
+        elif object_current == 12:
+            print(DB.DRAW.story[DB.DRAW.current_map])
+            return player_current, object_current, current_X_position, True
         else:
             return player_current, object_current, current_X_position, False

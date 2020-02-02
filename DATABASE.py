@@ -10,7 +10,9 @@ class DRAW:
         7: '&',
         8: 'o',
         9: 'E',
-        10: 'B'
+        10: 'B',
+        11: 'T',
+        12: '^'
     }
 
     # maps
@@ -51,3 +53,9 @@ class DRAW:
     ]
 
     items_for_player = [for_hp, for_power]
+
+    story = [
+        "There was a lie...",
+        "...on the creation...",
+        "...because no one had believed..."
+        ]
